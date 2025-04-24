@@ -6,6 +6,7 @@ import streamlit as st
 from PyPDF2 import PdfReader, PdfWriter
 import pandas as pd
 import base64
+import fitz
 
 st.set_page_config(page_title="Patient Form Processor", layout="wide")
 
@@ -65,8 +66,7 @@ def process_forms(temp_files, output_dir, progress_bar):
         progress_bar.progress((i + 1) / len(temp_files))
         st.subheader(f"Form {i+1} of {len(temp_files)}")
         
-        # Display PDF preview using our custom function
-        display_pdf(temp_files[i])
+
         
         # Get patient name with Streamlit inputs
         col1, col2 = st.columns(2)
