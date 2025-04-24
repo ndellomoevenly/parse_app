@@ -11,10 +11,19 @@ st.set_page_config(page_title="Patient Form Processor", layout="wide")
 
 # Function to display PDF (without using st.pdf)
 def display_pdf(file_path):
+    # Read PDF file
     with open(file_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="800" type="application/pdf"></iframe>'
-    st.markdown(pdf_display, unsafe_allow_html=True)
+        pdf_bytes = f.read()
+    
+    # Create a download link for the current page
+    st.download_button(
+        label="📄 Download this page for viewing",
+        data=pdf_bytes,
+        file_name=f"page_{st.session_state.current_form + 1}.pdf",
+        mime="application/pdf"
+    )
+    
+    st.warning("PDF preview is not available directly in the app. Please download the page to view it.")
 
 # Step 1: Split multi-page PDF into individual pages
 def split_pdf(input_file, output_dir):
