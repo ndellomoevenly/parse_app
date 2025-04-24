@@ -6,7 +6,7 @@ import streamlit as st
 from PyPDF2 import PdfReader, PdfWriter
 import pandas as pd
 import base64
-import fitz
+
 
 st.set_page_config(page_title="Patient Form Processor", layout="wide")
 
